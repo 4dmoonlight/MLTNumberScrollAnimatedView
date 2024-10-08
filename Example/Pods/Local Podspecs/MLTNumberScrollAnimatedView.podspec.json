@@ -1,0 +1,28 @@
+{
+  "name": "MLTNumberScrollAnimatedView",
+  "version": "0.1.0",
+  "summary": "A short description of MLTNumberScrollAnimatedView.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/Hou Rui/MLTNumberScrollAnimatedView",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Hou Rui": "4dmoonlight@users.noreply.github.com"
+  },
+  "source": {
+    "git": "https://github.com/4dmoonlight/MLTNumberScrollAnimatedView.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "12.0"
+  },
+  "source_files": "MLTNumberScrollAnimatedView/Classes/**/*",
+  "public_header_files": "Pod/Classes/**/*.h",
+  "dependencies": {
+    "SnapKit": [
+
+    ]
+  }
+}
