@@ -2,7 +2,7 @@
 //  MLTAnimatedNumberText.swift
 //  TestSwift
 //
-//  Created by StoryMatrix07 on 2024/9/25.
+//  Created by Hou Rui on 2024/9/25.
 //
 
 import UIKit
