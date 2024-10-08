@@ -1,0 +1,24 @@
+PODS:
+  - MLTNumberScrollAnimatedView (0.1.0):
+    - SnapKit
+  - SnapKit (5.7.1)
+
+DEPENDENCIES:
+  - MLTNumberScrollAnimatedView (from `../`)
+  - SnapKit
+
+SPEC REPOS:
+  trunk:
+    - SnapKit
+
+EXTERNAL SOURCES:
+  MLTNumberScrollAnimatedView:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  MLTNumberScrollAnimatedView: f761cd3c8325d865ebdcbfa22167cd9cf22ba04e
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
+
+PODFILE CHECKSUM: c46114aa4cd8ace337e6a5cb5acaf4bb23b33b1a
+
+COCOAPODS: 1.15.2

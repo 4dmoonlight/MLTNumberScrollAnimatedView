@@ -29,9 +29,9 @@
 
 /* Begin PBXFileReference section */
 		0BE0990B6F15867A35703B01 /* Pods-MLTNumberScrollAnimatedView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLTNumberScrollAnimatedView_Tests.debug.xcconfig"; path = "Target Support Files/Pods-MLTNumberScrollAnimatedView_Tests/Pods-MLTNumberScrollAnimatedView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		1C88958D4F373D58C7FBF3E6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		1C88958D4F373D58C7FBF3E6 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		495FA5B959173AA6F0D53442 /* Pods_MLTNumberScrollAnimatedView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLTNumberScrollAnimatedView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5B3B8B1A98952BE77F9A1EA8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		5B3B8B1A98952BE77F9A1EA8 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		607FACD01AFB9204008FA782 /* MLTNumberScrollAnimatedView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLTNumberScrollAnimatedView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACD51AFB9204008FA782 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 		C2439A9743949619F4E40856 /* Pods_MLTNumberScrollAnimatedView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MLTNumberScrollAnimatedView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D25B59D570BD92D2AD6E460C /* Pods-MLTNumberScrollAnimatedView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLTNumberScrollAnimatedView_Example.release.xcconfig"; path = "Target Support Files/Pods-MLTNumberScrollAnimatedView_Example/Pods-MLTNumberScrollAnimatedView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		E0FFA966E8D41C0B6E7BE877 /* Pods-MLTNumberScrollAnimatedView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLTNumberScrollAnimatedView_Example.debug.xcconfig"; path = "Target Support Files/Pods-MLTNumberScrollAnimatedView_Example/Pods-MLTNumberScrollAnimatedView_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		E65E6FCA121450A5905567F1 /* MLTNumberScrollAnimatedView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = MLTNumberScrollAnimatedView.podspec; path = ../MLTNumberScrollAnimatedView.podspec; sourceTree = "<group>"; };
+		E65E6FCA121450A5905567F1 /* MLTNumberScrollAnimatedView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MLTNumberScrollAnimatedView.podspec; path = ../MLTNumberScrollAnimatedView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,7 +156,6 @@
 				0BE0990B6F15867A35703B01 /* Pods-MLTNumberScrollAnimatedView_Tests.debug.xcconfig */,
 				B5AE4AE7B3F420347631A3F7 /* Pods-MLTNumberScrollAnimatedView_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -213,11 +212,12 @@
 				TargetAttributes = {
 					607FACCF1AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = "";
+						ProvisioningStyle = Manual;
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = "";
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
 				};
@@ -227,6 +227,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -292,10 +293,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-MLTNumberScrollAnimatedView_Example/Pods-MLTNumberScrollAnimatedView_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/MLTNumberScrollAnimatedView/MLTNumberScrollAnimatedView.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLTNumberScrollAnimatedView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -478,11 +481,15 @@
 			baseConfigurationReference = E0FFA966E8D41C0B6E7BE877 /* Pods-MLTNumberScrollAnimatedView_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MLTNumberScrollAnimatedView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hourui.demo.MLTNumberScrollAnimatedView-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
@@ -493,11 +500,15 @@
 			baseConfigurationReference = D25B59D570BD92D2AD6E460C /* Pods-MLTNumberScrollAnimatedView_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = MLTNumberScrollAnimatedView/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.hourui.demo.MLTNumberScrollAnimatedView-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
 				SWIFT_VERSION = 4.0;
 			};
