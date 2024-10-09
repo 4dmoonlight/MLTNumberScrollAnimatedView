@@ -1,6 +1,6 @@
 # MLTNumberScrollAnimatedView
 
-[![CI Status](https://img.shields.io/travis/Hou Rui/MLTNumberScrollAnimatedView.svg?style=flat)](https://travis-ci.org/Hou Rui/MLTNumberScrollAnimatedView)
+[![CI Status](https://img.shields.io/travis/4dmoonlight/MLTNumberScrollAnimatedView.svg?style=flat)](https://travis-ci.org/4dmoonlight/MLTNumberScrollAnimatedView)
 [![Version](https://img.shields.io/cocoapods/v/MLTNumberScrollAnimatedView.svg?style=flat)](https://cocoapods.org/pods/MLTNumberScrollAnimatedView)
 [![License](https://img.shields.io/cocoapods/l/MLTNumberScrollAnimatedView.svg?style=flat)](https://cocoapods.org/pods/MLTNumberScrollAnimatedView)
 [![Platform](https://img.shields.io/cocoapods/p/MLTNumberScrollAnimatedView.svg?style=flat)](https://cocoapods.org/pods/MLTNumberScrollAnimatedView)
