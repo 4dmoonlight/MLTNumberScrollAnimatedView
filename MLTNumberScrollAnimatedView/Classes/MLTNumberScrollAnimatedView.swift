@@ -122,7 +122,6 @@ public class MLTNumberScrollAnimatedView: UIView {
     }
     
     public func setValue(_ newValue: String?, animated: Bool = true, completion: (() -> Void)? = nil) {
-        print("change value \(String(describing: newValue)) \(String(describing: currentValue))")
         if currentValue == newValue {
             return
         }
@@ -134,7 +133,7 @@ public class MLTNumberScrollAnimatedView: UIView {
             return
         }
                 
-        if let oldValue = currentValue, oldValue.isEmpty == false, animated == true {
+        if let oldValue = currentValue, oldValue.isEmpty == false, animated == true, UIApplication.shared.applicationState == .active {
             if animator?.isRunning == true {
                 animator?.stopAnimation(true)
                 setValueWithNoAni(oldValue)
@@ -158,7 +157,6 @@ public class MLTNumberScrollAnimatedView: UIView {
             }
             animator = UIViewPropertyAnimator(duration: 1.0, curve: .easeInOut)
             for operation in sortedOperations {
-                descForOperation(operation: operation)
                 switch operation {
                 case .insert(char: let char, index: let index):
                     if let digit = charToDigit(char) {
@@ -170,9 +168,9 @@ public class MLTNumberScrollAnimatedView: UIView {
                         stackView.insertArrangedSubview(numberScrollView, at: index)
                         viewArray.insert(numberScrollView, at: index)
                         
-                        animator?.addAnimations {
-                            numberScrollView.alpha = 1
-                            numberScrollView.isHidden = false
+                        animator?.addAnimations { [weak numberScrollView] in
+                            numberScrollView?.alpha = 1
+                            numberScrollView?.isHidden = false
                         }
 
                     } else {
@@ -187,48 +185,46 @@ public class MLTNumberScrollAnimatedView: UIView {
                         stackView.insertArrangedSubview(label, at: index)
                         viewArray.insert(label, at: index)
                         
-                        animator?.addAnimations {
-                            label.alpha = 1
-                            label.isHidden = false
+                        animator?.addAnimations { [weak label] in
+                            label?.alpha = 1
+                            label?.isHidden = false
                         }
 
                     }
                 case .delete(char: _, index: let index):
                     let view = viewArray[index]
                     
-                    animator?.addAnimations {
-                        view.alpha = 0
-                        view.isHidden = true
+                    animator?.addAnimations { [weak view] in
+                        view?.alpha = 0
+                        view?.isHidden = true
                     }
-                case .replace(oldChar: let oldChar, newChar: let newChar, index: let index):
+                case .replace(oldChar: _, newChar: let newChar, index: let index):
                     if let numberView = viewArray[index] as? MLTNumberScrollView, let newNum = charToDigit(newChar) {
-                        animator?.addAnimations {
-                            numberView.setNumber(newNum, animated: false)
+                        animator?.addAnimations { [weak numberView] in
+                            numberView?.setNumber(newNum, animated: false)
                         }
                     } else if let label = viewArray[index] as? UILabel {
                         label.text = String(newChar)
-                    } else {
-                        print("replace error \(oldChar) \(newChar) \(index)")
                     }
                 }
             }
             animator?.addCompletion { [weak self] position in
                 guard let self = self else { return }
-                if position == .end {
-                    print("animated end")
-                    self.removeHiddenViews()
-                    
-                    setValueWithNoAni(value)
+                self.animator = nil
 
-                    completion?()
-                }
+                self.removeHiddenViews()
+                
+                self.setValueWithNoAni(value)
+                
+                completion?()
             }
             animator?.startAnimation()
         } else {
             setValueWithNoAni(value)
+            completion?()
         }
     }
-    
+
     private func removeHiddenViews() {
         var index = 0
         
