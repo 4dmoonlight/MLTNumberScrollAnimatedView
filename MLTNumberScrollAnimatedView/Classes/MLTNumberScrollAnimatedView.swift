@@ -170,10 +170,10 @@ public class MLTNumberScrollAnimatedView: UIView {
                         numberScrollView.setNumber(digit, animated: false)
                         numberScrollView.isHidden = true
                         numberScrollView.alpha = 0
-                        viewArray.insert(numberScrollView, at: index)
+                        viewArray.insertSafely(numberScrollView, at: index)
                         if index == 0 {
                             stackView.insertArrangedSubview(numberScrollView, at: index)
-                        } else if let indexInStack = stackView.arrangedSubviews.firstIndex(of: viewArray[index - 1]) {
+                        } else if let viewInStack = viewArray[safely: index - 1], let indexInStack = stackView.arrangedSubviews.firstIndex(of: viewInStack) {
                             stackView.insertArrangedSubview(numberScrollView, at: indexInStack + 1)
                         }
                         
@@ -191,7 +191,7 @@ public class MLTNumberScrollAnimatedView: UIView {
                         label.font = font
                         label.isHidden = true
                         label.alpha = 0
-                        viewArray.insert(label, at: index)
+                        viewArray.insertSafely(label, at: index)
                         stackView.insertArrangedSubview(label, at: index)
                         
                         animator?.addAnimations { [weak label] in
@@ -201,18 +201,18 @@ public class MLTNumberScrollAnimatedView: UIView {
 
                     }
                 case .delete(char: _, index: let index):
-                    let view = viewArray[index]
-                    viewArray.remove(at: index)
+                    let view = viewArray[safely: index]
+                    viewArray.removeSafely(at: index)
                     animator?.addAnimations { [weak view] in
                         view?.alpha = 0
                         view?.isHidden = true
                     }
                 case .replace(oldChar: _, newChar: let newChar, index: let index):
-                    if let numberView = viewArray[index] as? MLTNumberScrollView, let newNum = charToDigit(newChar) {
+                    if let numberView = viewArray[safely: index] as? MLTNumberScrollView, let newNum = charToDigit(newChar) {
                         animator?.addAnimations { [weak numberView] in
                             numberView?.setNumber(newNum, animated: false)
                         }
-                    } else if let label = viewArray[index] as? UILabel {
+                    } else if let label = viewArray[safely: index] as? UILabel {
                         label.text = String(newChar)
                     }
                 }
@@ -421,7 +421,7 @@ extension Array {
         }
     }
 
-    subscript(safe index: Int) -> Element? {
+    subscript(safely index: Int) -> Element? {
         return indices.contains(index) ? self[index] : nil
     }
 }
