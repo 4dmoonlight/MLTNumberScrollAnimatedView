@@ -141,12 +141,16 @@ public class MLTNumberScrollAnimatedView: UIView {
             operationArray = levenshteinDistanceWithCustomRules(oldValue, value).operations
             let sortedOperations = operationArray.sorted { op1, op2 in
                 switch (op1, op2) {
+                case (.replace(_, _, let index1), .replace(_, _, let index2)):
+                    return index1 < index2  // 替换操作按正序执行
+                case (.replace, _):
+                    return true  // 替换操作优先于删除和插入操作
+                case (_, .replace):
+                    return false
                 case (.delete(_, let index1), .delete(_, let index2)):
                     return index1 > index2  // 删除操作按逆序执行
                 case (.insert(_, let index1), .insert(_, let index2)):
                     return index1 < index2  // 插入操作按正序执行
-                case (.replace(_, _, let index1), .replace(_, _, let index2)):
-                    return index1 < index2  // 替换操作按正序执行
                 case (.delete, .insert):
                     return true  // 删除操作优先于插入操作
                 case (.insert, .delete):
@@ -398,4 +402,26 @@ public class MLTNumberScrollAnimatedView: UIView {
         stack.axis = .horizontal
         return stack
     }()
+}
+
+extension Array {
+    mutating func insertSafely(_ element: Element, at index: Int) {
+        if index <= count {
+            insert(element, at: index)
+        } else {
+            print("Error: Index \(index) is out of bounds for inserting element.")
+        }
+    }
+
+    mutating func removeSafely(at index: Int) {
+        if indices.contains(index) {
+            remove(at: index)
+        } else {
+            print("Error: Index \(index) is out of bounds for removing element.")
+        }
+    }
+
+    subscript(safe index: Int) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }
