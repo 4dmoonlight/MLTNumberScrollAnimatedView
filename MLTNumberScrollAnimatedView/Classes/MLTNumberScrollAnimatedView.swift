@@ -132,7 +132,7 @@ public class MLTNumberScrollAnimatedView: UIView {
             clearAllView()
             return
         }
-                
+        print("change value from \(String(describing: currentValue)) to \(String(describing: value))")
         if let oldValue = currentValue, oldValue.isEmpty == false, animated == true, UIApplication.shared.applicationState == .active {
             if animator?.isRunning == true {
                 animator?.stopAnimation(true)
@@ -157,6 +157,7 @@ public class MLTNumberScrollAnimatedView: UIView {
             }
             animator = UIViewPropertyAnimator(duration: 1.0, curve: .easeInOut)
             for operation in sortedOperations {
+                print("\(descForOperation(operation: operation))")
                 switch operation {
                 case .insert(char: let char, index: let index):
                     if let digit = charToDigit(char) {
@@ -165,8 +166,12 @@ public class MLTNumberScrollAnimatedView: UIView {
                         numberScrollView.setNumber(digit, animated: false)
                         numberScrollView.isHidden = true
                         numberScrollView.alpha = 0
-                        stackView.insertArrangedSubview(numberScrollView, at: index)
                         viewArray.insert(numberScrollView, at: index)
+                        if index == 0 {
+                            stackView.insertArrangedSubview(numberScrollView, at: index)
+                        } else if let indexInStack = stackView.arrangedSubviews.firstIndex(of: viewArray[index - 1]) {
+                            stackView.insertArrangedSubview(numberScrollView, at: indexInStack + 1)
+                        }
                         
                         animator?.addAnimations { [weak numberScrollView] in
                             numberScrollView?.alpha = 1
@@ -182,8 +187,8 @@ public class MLTNumberScrollAnimatedView: UIView {
                         label.font = font
                         label.isHidden = true
                         label.alpha = 0
-                        stackView.insertArrangedSubview(label, at: index)
                         viewArray.insert(label, at: index)
+                        stackView.insertArrangedSubview(label, at: index)
                         
                         animator?.addAnimations { [weak label] in
                             label?.alpha = 1
@@ -193,7 +198,7 @@ public class MLTNumberScrollAnimatedView: UIView {
                     }
                 case .delete(char: _, index: let index):
                     let view = viewArray[index]
-                    
+                    viewArray.remove(at: index)
                     animator?.addAnimations { [weak view] in
                         view?.alpha = 0
                         view?.isHidden = true
@@ -234,8 +239,6 @@ public class MLTNumberScrollAnimatedView: UIView {
             if view.isHidden {
                 stackView.removeArrangedSubview(view)
                 view.removeFromSuperview()
-                
-                viewArray.remove(at: index)
             } else {
                 index += 1 
             }
