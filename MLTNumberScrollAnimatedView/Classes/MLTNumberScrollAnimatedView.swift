@@ -192,7 +192,12 @@ public class MLTNumberScrollAnimatedView: UIView {
                         label.isHidden = true
                         label.alpha = 0
                         viewArray.insertSafely(label, at: index)
-                        stackView.insertArrangedSubview(label, at: index)
+                        if index == 0 {
+                            stackView.insertArrangedSubview(label, at: index)
+                        } else if let viewInStack = viewArray[safely: index - 1], let indexInStack = stackView.arrangedSubviews.firstIndex(of: viewInStack) {
+                            stackView.insertArrangedSubview(label, at: indexInStack + 1)
+                        }
+
                         
                         animator?.addAnimations { [weak label] in
                             label?.alpha = 1
