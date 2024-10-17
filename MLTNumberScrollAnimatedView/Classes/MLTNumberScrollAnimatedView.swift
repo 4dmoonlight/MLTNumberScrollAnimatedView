@@ -405,6 +405,7 @@ public class MLTNumberScrollAnimatedView: UIView {
         let stack = UIStackView()
         stack.spacing = 0
         stack.axis = .horizontal
+        stack.semanticContentAttribute = .forceLeftToRight // RTL fix
         return stack
     }()
 }
