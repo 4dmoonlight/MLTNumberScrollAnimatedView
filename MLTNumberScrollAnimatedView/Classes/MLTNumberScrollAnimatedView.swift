@@ -74,12 +74,19 @@ class MLTNumberScrollView: UIView {
     
     lazy var labels: [UILabel] = {
         var labels = [UILabel]()
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.current  // 使用当前区域设置
+        
         for number in 0...9 {
             let label = UILabel()
             label.font = font
             label.textColor = textColor
             label.textAlignment = .center
-            label.text = "\(number)"
+            
+            // 使用NumberFormatter来获取本地化的数字字符串
+            let numberString = formatter.string(from: NSNumber(value: number)) ?? "\(number)"
+            
+            label.text = numberString
             labels.append(label)
         }
         return labels
@@ -198,7 +205,6 @@ public class MLTNumberScrollAnimatedView: UIView {
                             stackView.insertArrangedSubview(label, at: indexInStack + 1)
                         }
 
-                        
                         animator?.addAnimations { [weak label] in
                             label?.alpha = 1
                             label?.isHidden = false
@@ -238,7 +244,7 @@ public class MLTNumberScrollAnimatedView: UIView {
             completion?()
         }
     }
-
+    
     private func removeHiddenViews() {
         var index = 0
         
@@ -249,7 +255,7 @@ public class MLTNumberScrollAnimatedView: UIView {
                 stackView.removeArrangedSubview(view)
                 view.removeFromSuperview()
             } else {
-                index += 1 
+                index += 1
             }
         }
     }
@@ -301,7 +307,18 @@ public class MLTNumberScrollAnimatedView: UIView {
     }
 
     private func charToDigit(_ char: Character) -> Int? {
-        Int(String(char))
+        if let digit = Int(String(char)) {
+            return digit
+        } else {
+            let formatter = NumberFormatter()
+            formatter.locale = Locale.current  // 使用当前区域设置
+            // 尝试将字符转换为字符串，然后使用NumberFormatter解析
+            if let number = formatter.number(from: String(char)) {
+                return number.intValue
+            } else {
+                return nil
+            }
+        }
     }
 
     private func levenshteinDistanceWithCustomRules(_ str1: String, _ str2: String) -> (distance: Int, operations: [MLTCharEditOperation]) {
